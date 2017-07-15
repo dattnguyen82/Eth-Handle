@@ -56,7 +56,10 @@ contract Handle {
   //internal functions
   function _pass(address newHolder) internal
   {
-    require(limit > 0);
+    if (limit <= 0)
+    {
+      selfdestruct(creator);
+    }
     limit--;
     holder = newHolder;
     HandlePassed(holder, limit, now);
